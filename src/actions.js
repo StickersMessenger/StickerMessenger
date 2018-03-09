@@ -50,9 +50,9 @@ const validateQuickReplies = (quick_replies) => {
 
 const validateQuickReply = (quick_reply) => {
   if (typeof(quick_reply) !== 'string') {
-    if (!quick_reply || typeof(quick_reply.title) !== 'string') {
+    if (!quick_reply || (typeof(quick_reply.title) !== 'string' && !_.includes(['location', 'user_email', 'user_phone_number'], quick_reply.content_type))) {
       throw new Error('Expected quick_reply to be a string or an object' +
-        'with a title.')
+        'with a title or one of these content_types: location, user_email, user_phone_number')
     }
   }
 }
